@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ngabuburit Craft Shop</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, sans-serif;
+}
+
+body{
+  background: radial-gradient(circle at top,#020617,#030a1f,#000);
+  color:white;
+}
+
+/* Header */
+header{
+  padding:25px;
+  text-align:center;
+  font-size:26px;
+  font-weight:bold;
+  background: linear-gradient(45deg,#00ffe0,#00aaff);
+  color:black;
+  letter-spacing:1px;
+}
+
+/* Container */
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:20px;
+  padding-bottom:120px;
+  display:grid;
+  gap:25px;
+}
+
+/* Card Premium */
+.card{
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(30px);
+  padding:25px;
+  border-radius:25px;
+  box-shadow:0 0 40px rgba(0,255,200,0.2);
+  transition:.4s;
+}
+
+.card:hover{
+  transform:translateY(-8px) scale(1.01);
+}
+
+/* Item Row */
+.item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px;
+  margin:12px 0;
+  background: rgba(0,255,200,0.08);
+  border-radius:15px;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+/* Input Style */
+input{
+  padding:14px;
+  border-radius:12px;
+  border:none;
+  width:100%;
+  max-width:250px;
+  background:rgba(255,255,255,0.1);
+  color:white;
+}
+
+/* Button Premium */
+button{
+  padding:13px 22px;
+  border:none;
+  border-radius:15px;
+  background: linear-gradient(45deg,#00ffe0,#00aaff);
+  color:black;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.3s;
+}
+
+button:hover{
+  transform:scale(1.1);
+}
+
+/* Footer */
+.footer{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  text-align:center;
+  padding:15px;
+  background:#030a1f;
+  color:#00ffe0;
+  font-weight:bold;
+  box-shadow:0 -5px 20px rgba(0,0,0,0.6);
+}
+
+/* Responsive */
+@media(min-width:800px){
+  .container{
+    grid-template-columns:1fr 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>🌙 Ngabuburit Craft Premium Shop</header>
+
+<div class="container">
+
+<!-- Rank Shop -->
+<div class="card">
+<h2>🎖 Rank Server</h2>
+
+<div class="item"><span>Iron — 2K / 5M Money</span><button onclick="selectRank('Iron')">Pilih</button></div>
+<div class="item"><span>Gold — 5K</span><button onclick="selectRank('Gold')">Pilih</button></div>
+<div class="item"><span>Diamond — 7K</span><button onclick="selectRank('Diamond')">Pilih</button></div>
+<div class="item"><span>OverWorld — 10K</span><button onclick="selectRank('OverWorld')">Pilih</button></div>
+<div class="item"><span>Nether — 12K</span><button onclick="selectRank('Nether')">Pilih</button></div>
+<div class="item"><span>The End — 15K</span><button onclick="selectRank('The End')">Pilih</button></div>
+<div class="item"><span>Space — 18K</span><button onclick="selectRank('Space')">Pilih</button></div>
+<div class="item"><span>Legends — 25K</span><button onclick="selectRank('Legends')">Pilih</button></div>
+<div class="item"><span>VIP — 45K</span><button onclick="selectRank('VIP')">Pilih</button></div>
+
+</div>
+
+<!-- Custom Order -->
+<div class="card">
+<h2>🛒 Order Custom Item</h2>
+
+<div class="item">
+<span>Nama Item</span>
+<input type="text" id="itemName" placeholder="Diamond Block">
+</div>
+
+<div class="item">
+<span>Jumlah</span>
+<input type="number" id="itemQty" placeholder="Jumlah">
+</div>
+
+<div class="item">
+<span>Money</span>
+<input type="number" id="moneyAmount" placeholder="Jumlah M">
+</div>
+
+<button style="width:100%" onclick="buyAll()">
+Order Sekarang 🚀
+</button>
+
+</div>
+
+<!-- Social -->
+<div class="card">
+<h2>💬 Community</h2>
+
+<button style="width:100%;margin-bottom:12px"
+onclick="window.open('https://discord.gg/qP5tqfQuU','_blank')">
+Join Discord
+</button>
+
+<button style="width:100%"
+onclick="window.open('https://chat.whatsapp.com/Keo8k3IHIUbDRec695AtqN','_blank')">
+Join WhatsApp Group
+</button>
+
+</div>
+
+</div>
+
+<div class="footer">
+🌙 Ngabuburit CRAFT 2026
+</div>
+
+<script>
+let selectedRank=null;
+
+function selectRank(rank){
+ selectedRank=rank;
+ alert("Rank "+rank+" dipilih ✅");
+}
+
+function buyAll(){
+ const itemName=document.getElementById("itemName").value;
+ const qty=document.getElementById("itemQty").value;
+ const money=document.getElementById("moneyAmount").value;
+
+ if(!itemName && !selectedRank && (!money || money<1)){
+   alert("Isi minimal 1 order!");
+   return;
+ }
+
+ const phone="62881023660529";
+ let msg="Halo Min, saya mau order ";
+
+ if(selectedRank) msg+="Rank "+selectedRank+" ";
+ if(itemName && qty) msg+=`Item ${itemName} x${qty} `;
+ if(money && money>=1) msg+=`${money}M Coin `;
+
+ window.open(
+ `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`,
+ "_blank"
+ );
+}
+</script>
+
+</body>
+</html>
